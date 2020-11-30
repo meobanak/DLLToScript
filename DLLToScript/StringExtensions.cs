@@ -24,15 +24,16 @@ namespace DLLToScript
             File.WriteAllBytes(path, bytes);
         }
 
-        public static Dictionary<string, object> GetInfoDLL(this string path)
+        public static AssemblyModel GetInfoDLL(this string path)
         {
-            Dictionary<string, object> result = new Dictionary<string, object>();
+            AssemblyModel result = new AssemblyModel();
 
             Assembly assembly = Assembly.LoadFile(path);
-            result["Version"] = assembly.GetName().Version.ToString();
-            result["ProductName"] = assembly.GetName().Name.ToString();
-            result["OriginalFileName"] = assembly.ManifestModule.ToString();
-            result["CreatedDate"] = DateTime.Today;
+            result.Version = assembly.GetName().Version.ToString();
+            result.ProductName = assembly.GetName().Name.ToString();
+            result.OriginalFileName = assembly.ManifestModule.ToString();
+            result.CreatedDate = DateTime.Today;
+
             return result;
         }
     }
